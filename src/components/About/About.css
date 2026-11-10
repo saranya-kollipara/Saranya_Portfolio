@@ -1,0 +1,116 @@
+.about-section {
+  background-color: var(--bg-secondary);
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+  margin-top: var(--spacing-lg);
+}
+
+/* Profile Image Wrapper with a neat premium border offset */
+.about-image-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.about-image-border {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: var(--border-radius-lg);
+  background-color: var(--primary-color);
+}
+
+.about-image-border::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary-color);
+  z-index: 1;
+  transition: transform var(--transition-normal);
+}
+
+.about-image-border:hover::before {
+  transform: translate(-4px, -4px);
+}
+
+.about-profile-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-lg);
+  border: 4px solid var(--bg-color);
+  z-index: 2;
+  box-shadow: var(--card-shadow);
+}
+
+/* About Content */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.about-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.about-text {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* Stats Cards Grid */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.stat-box {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-sm);
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-fast);
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--primary-color);
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}

@@ -1,0 +1,195 @@
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse-subtle {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* Scroll Reveal Classes (Driven by useScrollReveal hook) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Scroll Reveal Directions */
+.reveal.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.reveal.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.reveal.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal.reveal-zoom {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+.reveal.reveal-zoom.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger reveals */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* Automatic Section-Level Child Card Staggers */
+
+/* 1. Skills Grid Stagger */
+.skills-section .skill-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.2s ease;
+}
+
+.skills-section.active .skill-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skills-section.active .skill-card:nth-child(1) { transition-delay: 0.05s; }
+.skills-section.active .skill-card:nth-child(2) { transition-delay: 0.1s; }
+.skills-section.active .skill-card:nth-child(3) { transition-delay: 0.15s; }
+.skills-section.active .skill-card:nth-child(4) { transition-delay: 0.2s; }
+.skills-section.active .skill-card:nth-child(5) { transition-delay: 0.25s; }
+.skills-section.active .skill-card:nth-child(6) { transition-delay: 0.3s; }
+.skills-section.active .skill-card:nth-child(7) { transition-delay: 0.35s; }
+.skills-section.active .skill-card:nth-child(8) { transition-delay: 0.4s; }
+.skills-section.active .skill-card:nth-child(9) { transition-delay: 0.45s; }
+.skills-section.active .skill-card:nth-child(10) { transition-delay: 0.5s; }
+
+/* 2. Projects Grid Stagger */
+.projects-section .project-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease, transform var(--transition-normal);
+}
+
+.projects-section.active .project-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.projects-section.active .project-card:nth-child(1) { transition-delay: 0.1s; }
+.projects-section.active .project-card:nth-child(2) { transition-delay: 0.2s; }
+.projects-section.active .project-card:nth-child(3) { transition-delay: 0.3s; }
+
+/* 3. Internships List Stagger */
+.internships-section .internship-card {
+  opacity: 0;
+  transform: translateY(45px);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.internships-section.active .internship-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.internships-section.active .internship-card:nth-child(1) { transition-delay: 0.1s; }
+.internships-section.active .internship-card:nth-child(2) { transition-delay: 0.25s; }
+
+/* 4. Education Timeline Stagger */
+.education-section .timeline-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.education-section.active .timeline-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.education-section.active .timeline-item:nth-child(1) { transition-delay: 0.15s; }
+.education-section.active .timeline-item:nth-child(2) { transition-delay: 0.30s; }
+.education-section.active .timeline-item:nth-child(3) { transition-delay: 0.45s; }
+
+/* Stagger stats in the About content */
+.about-content.active .stat-box {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.about-content.active .stat-box:nth-child(1) { animation-delay: 0.2s; }
+.about-content.active .stat-box:nth-child(2) { animation-delay: 0.3s; }
+.about-content.active .stat-box:nth-child(3) { animation-delay: 0.4s; }

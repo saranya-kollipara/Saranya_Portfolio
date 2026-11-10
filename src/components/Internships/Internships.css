@@ -1,0 +1,128 @@
+.internships-section {
+  background-color: var(--bg-color);
+}
+
+.internships-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.internship-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-fast);
+}
+
+.internship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--primary-color);
+}
+
+/* Internship Header styling */
+.internship-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.internship-company-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.company-icon-frame {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-sm);
+  background-color: rgba(79, 70, 229, 0.08);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.internship-company {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.internship-role {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-inline-icon {
+  color: var(--text-muted);
+}
+
+.internship-duration-chip {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: rgba(79, 70, 229, 0.08);
+  padding: 0.4rem 0.85rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.internship-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: var(--spacing-sm) 0;
+}
+
+/* Description Details List */
+.internship-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.internship-detail-item {
+  position: relative;
+  padding-left: var(--spacing-md);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.internship-detail-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Responsiveness helper for header */
+@media (max-width: 600px) {
+  .internship-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .internship-duration-chip {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+}
