@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
+import os from 'os';
+import { execSync, spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -11,8 +12,16 @@ const rootTexPath = path.join(projectRoot, 'resume.tex');
 const publicTexPath = path.join(projectRoot, 'public', 'resume.tex');
 const outputPdfPath = path.join(projectRoot, 'public', 'resume.pdf');
 
-// Ensure root and public resume.tex are in sync
-if (fs.existsSync(rootTexPath)) {
+// Ensure root and public resume.tex are in sync based on the newer file
+if (fs.existsSync(rootTexPath) && fs.existsSync(publicTexPath)) {
+  const rootMtime = fs.statSync(rootTexPath).mtimeMs;
+  const publicMtime = fs.statSync(publicTexPath).mtimeMs;
+  if (publicMtime > rootMtime) {
+    fs.copyFileSync(publicTexPath, rootTexPath);
+  } else if (rootMtime > publicMtime) {
+    fs.copyFileSync(rootTexPath, publicTexPath);
+  }
+} else if (fs.existsSync(rootTexPath)) {
   fs.copyFileSync(rootTexPath, publicTexPath);
 } else if (fs.existsSync(publicTexPath)) {
   fs.copyFileSync(publicTexPath, rootTexPath);
@@ -291,6 +300,34 @@ const htmlContent = `<!DOCTYPE html>
         <li>Designed user interface using HTML and CSS animations.</li>
       </ul>
     </div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Vehicle Rental Management System</span>
+        <span class="entry-date">Personal Project</span>
+      </div>
+      <div class="entry-subheader">
+        <span>Technologies: HTML, CSS, JavaScript, react.js</span>
+      </div>
+      <ul>
+       <li>Created a vehicle rental management system using HTML, CSS, JavaScript, and react.js </li>
+       <li>Developed an online car rental system that allows users to browse, search, and rent cars.</li>
+      <li>Designed user interface and user experience for the website. </li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Online Quiz and Exam System</span>
+        <span class="entry-date">Group Project</span>
+      </div>
+      <div class="entry-subheader">
+        <span>Technologies: HTML, CSS, JavaScript, react.js</span>
+      </div>
+      <ul>
+      <li>Developed a quiz and exam management system for students and teachers.</li>
+      <li>Implemented features such as quiz creation, question management, and result tracking. </li>
+      <li>Artificial Intelligence integration for generating exams and analyzing results </li>
+      </ul>
+    </div>
   </div>
 
   <div class="section">
@@ -346,9 +383,23 @@ if (!browserExe) {
 }
 
 try {
-  const command = `"${browserExe}" --headless --disable-gpu --no-pdf-header-footer --no-header-footer --print-to-pdf="${outputPdfPath}" "file:///${tempHtmlPath.replace(/\\/g, '/')}"`;
-  execSync(command, { stdio: 'inherit' });
-  console.log(`Successfully compiled resume -> ${outputPdfPath}`);
+  const tempUserDataDir = path.join(os.tmpdir(), 'edge_pdf_profile');
+  const args = [
+    '--headless',
+    '--disable-gpu',
+    '--no-sandbox',
+    `--user-data-dir=${tempUserDataDir}`,
+    '--no-pdf-header-footer',
+    '--no-header-footer',
+    `--print-to-pdf=${outputPdfPath}`,
+    tempHtmlPath
+  ];
+  const res = spawnSync(browserExe, args, { stdio: 'inherit' });
+  if (res.status === 0 || fs.existsSync(outputPdfPath)) {
+    console.log(`Successfully compiled resume -> ${outputPdfPath}`);
+  } else {
+    throw new Error(`Browser exited with status ${res.status}`);
+  }
 } catch (err) {
   console.error('Error generating PDF:', err);
 } finally {
